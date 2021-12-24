@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  password  String
+}
+
+model BoardGame {
+  id                            Int    @id
+  name                          String
+  webname                       String
+  description                   String
+  average                       Float
+  numVotes                      Int
+  year                          Int
+  age                           Int
+  weight                        Float
+  playTimeMin                   Int
+  playTimeMax                   Int
+  numberOfPlayers               Int[]
+  numberOfPlayersBest           Int[]
+  numberOfPlayersNotRecommended Int[]
+  designers                     Int[]
+  categories                    Int[]
+  mechechanisms                 Int[]
+  expansions                    Int[]
+  expansionOf                   Int[]
+  publishers                    Int[]
+  families                      Int[]
+}
+
+model Category {
+  id          Int    @id
+  name        String
+  webname     String
+  description String
+  image       String
+}
+
+model Designer {
+  id          Int    @id
+  name        String
+  webname     String
+  description String
+  image       String
+}
+
+model Mechanism {
+  id          Int    @id
+  name        String
+  webname     String
+  description String
+  image       String
+}
+
+model Publisher {
+  id          Int    @id
+  name        String
+  webname     String
+  description String
+  image       String
+  color       String
+}
+
+model Type {
+  id          Int     @id
+  name        String
+  webname     String
+  description String
+  image       String
+  color       String
+  type        String
+  full        Boolean
+}
